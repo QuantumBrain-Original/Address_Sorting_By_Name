@@ -2,6 +2,10 @@
 #include <fstream>
 #include <string>
 #include <windows.h>
+#define NDEBUG
+#include <cassert>
+
+#define _ASSERT_MESSAGE(exp, msg) assert(((void)msg, exp))
 
 class Address_Storage
 {
@@ -55,6 +59,8 @@ void sort(Address_Storage* addresses, int &size)
     {
         for (int j = 0; j < size - 1; j++)
         {
+            _ASSERT_MESSAGE((j + 1) < size, "Превышен допустимый размер!");
+//            assert((void("Превышен допустимый размер!"), (j + 1) < size));
             if (addresses[j].get_name_city() > addresses[j + 1].get_name_city())
                 std::swap(addresses[j], addresses[j + 1]);
 
